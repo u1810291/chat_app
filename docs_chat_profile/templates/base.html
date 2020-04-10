@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+{% block head %}
+
+<meta charset="UTF-8">
+<title>Base</title>
+{% endblock %}
+</head>
+<body>
+{% load static %}
+<div class="container">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        {% if user.is_authenticated %}
+            <li class="nav-item active"><a class="nav-link" href="/accounts">Home <span class="sr-only">(current)</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="/accounts/logout">Logout</a></li>
+            <li class="nav-item"><a class="nav-link" href="/accounts/profile">Profile</a></li>
+            <li class="nav-item"><a class="nav-link" href="/accounts/profile/edit">Edit profile</a></li>
+            <li class="nav-item"><a class="nav-link" href="/accounts/profile/change_password">Change password</a></li>
+            <li class="nav-item"><a class="nav-link" href="/accounts/password_reset">Reset password</a></li>
+            <li class="nav-item"><a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a></li>
+        {% else %}
+            <a class="navbar-brand" href=" /accounts/register">Register</a>
+            <li class="nav-item"><a class="nav-link" href="/accounts/login">Login</a></li>
+        {% endif %}
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+</div>
+{% block body %}
+<h1>Base</h1>
+{% endblock %}
+<div class="jumbotron ">
+<h1>Here is a footer</h1>
+</div>
+</body>
+</html>

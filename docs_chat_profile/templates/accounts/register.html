@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div class="container">
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+            <table>
+                <tr>
+                    <td>
+                        {{ field.label_tag }}<br>
+                        {{ field }}
+                        {% if field.help_text %}
+                            <small style="color:grey">{{ field.help_text }}</small>
+                        {% endif %}
+                        {% for error in field.errors %}
+                            <p style="color: red">{{ error }}</p>
+                        {% endfor %}
+                    </td>
+                </table>
+            {% endfor %}
+        <br>
+            <button type="submit">Submit</button>
+        </form>
+        <h1>Register page</h1>
+        <p>Lorem ipsum dolor </p>
+    </div>
+{% endblock %}
