@@ -7,14 +7,12 @@
   <title>Index Page</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
 
-  <link rel="stylesheet" type="text/css" href="../static/chat_style.css" >
 {% endblock %}
 {% block body %}
   <body>
   <div class="container1">
     <h3 class=" text-center">Messaging</h3>
     <div class="messaging">
-<button class="btn btn-outline-danger " type="button" name="login">Login</button>
       <div class="inbox_msg">
         <div class="inbox_people">
           <div class="headind_srch">
@@ -29,135 +27,47 @@
                 </span> </div>
             </div>
           </div>
-          <div class="inbox_chat">
-            <div class="chat_list active_chat">
-              <div class="chat_people">
-                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                <div class="chat_ib">
-<!--                  https://stackoverflow.com/questions/51601390/django-how-to-loop-through-nested-json-object-in-html/51601981-->
-
-                  <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                  <p>Test, which is a new approach to have all solutions
-                    astrology under one roof.</p>
+              <div class="inbox_chat">
+            {% for x in chats %}
+                <div class="chat_list active_chat">
+                  <div class="chat_people">
+                    <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                    <div class="chat_ib">
+                        <h5>{{ x.user_first_name_from }}</h5>
+                        <p>{{ x.chat_text }}</p>
+    <!--                  https://stackoverflow.com/questions/51601390/django-how-to-loop-through-nested-json-object-in-html/51601981-->
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div class="chat_list">
-              <div class="chat_people">
-                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                <div class="chat_ib">
-                  <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                  <p>Test, which is a new approach to have all solutions
-                    astrology under one roof.</p>
-                </div>
-              </div>
-            </div>
-            <div class="chat_list">
-              <div class="chat_people">
-                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                <div class="chat_ib">
-                  <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                  <p>Test, which is a new approach to have all solutions
-                    astrology under one roof.</p>
-                </div>
-              </div>
-            </div>
-            <div class="chat_list">
-              <div class="chat_people">
-                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                <div class="chat_ib">
-                  <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                  <p>Test, which is a new approach to have all solutions
-                    astrology under one roof.</p>
-                </div>
-              </div>
-            </div>
-            <div class="chat_list">
-              <div class="chat_people">
-                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                <div class="chat_ib">
-                  <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                  <p>Test, which is a new approach to have all solutions
-                    astrology under one roof.</p>
-                </div>
-              </div>
-            </div>
-            <div class="chat_list">
-              <div class="chat_people">
-                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                <div class="chat_ib">
-                  <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                  <p>Test, which is a new approach to have all solutions
-                    astrology under one roof.</p>
-                </div>
-              </div>
-            </div>
-            <div class="chat_list">
-              <div class="chat_people">
-                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                <div class="chat_ib">
-                  <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                  <p>Test, which is a new approach to have all solutions
-                    astrology under one roof.</p>
-                </div>
-              </div>
-            </div>
+            {% endfor %}
           </div>
         </div>
         <div class="mesgs">
           <div class="msg_history">
-            <div class="incoming_msg">
-              <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-              <div class="received_msg">
-                <div class="received_withd_msg">
-                  <p>Test which is a new approach to have all
-                    solutions</p>
-                  <span class="time_date"> 11:01 AM    |    June 9</span></div>
-              </div>
-            </div>
+              {% for obj in chats %}
+                  {% if obj.user_first_name_to is 2 %}
             <div class="outgoing_msg">
               <div class="sent_msg">
-                <p>Test which is a new approach to have all
-                  solutions</p>
-                <span class="time_date"> 11:01 AM    |    June 9</span> </div>
-            </div>
-            <div class="incoming_msg">
-              <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-              <div class="received_msg">
-                <div class="received_withd_msg">
-                  <p>Test, which is a new approach to have</p>
-                  <span class="time_date"> 11:01 AM    |    Yesterday</span></div>
+                <p>{{ obj.chat_type }}
+                    {{ obj.chat_text }}</p>
+                <span class="time_date"> {{ obj.date_message }}</span>
+                <br>
               </div>
             </div>
-            <div class="outgoing_msg">
-              <div class="sent_msg">
-                <p>Apollo University, Delhi, India Test</p>
-                <span class="time_date"> 11:01 AM    |    Today</span> </div>
-            </div>
+                  {% else %}
             <div class="incoming_msg">
               <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
               <div class="received_msg">
                   <div class="received_withd_msg">
-
-                      {% for user in users %}
-                      <p>{{ user.id }}</p>
-                      <p>{{ user.first_name }}</p>
-                      <p>{{ user.last_name }}</p>
-                      <p>{{ user.email }}</p>
-                      {% endfor %}
-{#                      {% for obj in chat %}#}
-{#                        <p>{{ obj.chat_id }}</p>#}
-{#                        <p>{{ obj.chat_description }}</p>#}
-{#                        <p>{{ obj.chat_type }}</p>#}
-{#                        <p>{{ obj.chat_text }}</p>#}
-{#                        <p>{{ obj.date_message }}</p>#}
-{##}
-{#                        <br>#}
-{#                    {% endfor %}#}
-                  <span class="time_date"> 11:01 AM    |    Today</span>
+                    <p>{{ obj.chat_type }}
+                        {{ obj.chat_text }}</p>
+                    <span class="time_date"> {{ obj.date_message }}</span>
+                    <br>
                 </div>
               </div>
             </div>
+                  {% endif %}
+              {% endfor %}
           </div>
 <!--          <form method="post" enctype="multipart/form-data">-->
           <div class="type_msg ">
@@ -184,4 +94,5 @@
           <h1>Welcome</h1>
       </div>
   </div>
+  </body>
 {% endblock %}

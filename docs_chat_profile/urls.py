@@ -3,6 +3,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from . import views
+from .views import IndexView
 from django.contrib.auth.views import (
     LoginView,
     LogoutView,
@@ -15,6 +16,7 @@ from django.contrib.auth.views import (
 
 urlpatterns = [
     path('', views.index),
+    # path('', IndexView.as_view()),
     path('home/', views.home, name='home'),
     path('login/', LoginView.as_view(template_name='accounts/login.html'), name='login'),
     path('logout/', LogoutView.as_view(template_name='accounts/logout.html'), name='logout'),

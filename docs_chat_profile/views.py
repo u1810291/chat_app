@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect, Http404
+
 from .forms import RegistrationForm, EditProfileForm
 from .models import Chat
 from django.contrib.auth import login, authenticate
@@ -7,6 +8,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .serializers import ChatSerializer
 # def index(request):
 #     if request.method == 'POST':
 #         form = SmileForm(request.POST, request.FILES)
@@ -26,9 +31,22 @@ def home(request):
 
 @login_required()
 def index(request):
-    users = User.objects.all()
-    return render(request, 'index.html', {'users': users})
+    chats = Chat.objects.all()
+    return render(request, 'index.html', {'chats': chats})
 
+
+class IndexView(APIView):
+    def get(self, request):
+        chat = Chat.objects.all()
+        serializer = ChatSerializer(chat, many=True)
+        return Response({'chat': serializer.data})
+
+    def post(self, request):
+        chat = request.data.get('chat')
+        serializer = ChatSerializer(data=chat)
+        if serializer.is_valid(raise_exception=True):
+            chat_saved = serializer.save()
+            return Response({"success": "Chat ' {} ' created successfully".format(chat.chat_type)})
 
 def register(request):
     form = RegistrationForm(request.POST)
