@@ -45,10 +45,10 @@
         <div class="mesgs">
           <div class="msg_history">
               {% for obj in chats %}
-                  {% if obj.user_first_name_to is 2 %}
+                  {% if obj.user_first_name_to is 1 %}
             <div class="outgoing_msg">
               <div class="sent_msg">
-                <p>{{ obj.chat_type }}
+                <p>{{ obj.chat_type }} <br>
                     {{ obj.chat_text }}</p>
                 <span class="time_date"> {{ obj.date_message }}</span>
                 <br>

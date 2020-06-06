@@ -16,6 +16,8 @@ class ChatSerializer(serializers.Serializer):
     def create(self, validated_data):
         return Chat.objects.create(**validated_data)
 
+    def update(self, instance, validated_data):
+        instance.title = validated_data.get('title', instance.title)
 
 class UserChatSerializer(serializers.Serializer):
     chat_id = serializers.IntegerField()

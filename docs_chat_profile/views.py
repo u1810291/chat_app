@@ -12,6 +12,8 @@ from django.contrib.auth.decorators import login_required
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import ChatSerializer
+
+
 # def index(request):
 #     if request.method == 'POST':
 #         form = SmileForm(request.POST, request.FILES)
@@ -32,6 +34,7 @@ def home(request):
 @login_required()
 def index(request):
     chats = Chat.objects.all()
+    to = Chat.user_first_name_to
     return render(request, 'index.html', {'chats': chats})
 
 
@@ -47,6 +50,7 @@ class IndexView(APIView):
         if serializer.is_valid(raise_exception=True):
             chat_saved = serializer.save()
             return Response({"success": "Chat ' {} ' created successfully".format(chat.chat_type)})
+
 
 def register(request):
     form = RegistrationForm(request.POST)
@@ -70,6 +74,7 @@ def register_redirect(request):
 @login_required()
 def login_redirect(request):
     return redirect('/accounts/login')
+
 
 @login_required()
 def view_profile(request):
