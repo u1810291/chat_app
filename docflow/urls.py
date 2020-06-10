@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from docs_chat_profile import views
 from django.contrib.auth.decorators import login_required
+
 urlpatterns = [
     path('', views.login_redirect, name='login_redirect'),
     path('accounts/', include("docs_chat_profile.urls")),

@@ -2,16 +2,17 @@ from django.contrib import messages
 from django.shortcuts import render, redirect, Http404
 
 from .forms import RegistrationForm, EditProfileForm
-from .models import Chat
+from .models import Chat, Person
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 
-from rest_framework.views import APIView
+from rest_framework import viewsets
+# from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import ChatSerializer
+from .serializers import UserChatSerializer, GroupSerializer
 
 
 # def index(request):
@@ -38,18 +39,27 @@ def index(request):
     return render(request, 'index.html', {'chats': chats})
 
 
-class IndexView(APIView):
-    def get(self, request):
-        chat = Chat.objects.all()
-        serializer = ChatSerializer(chat, many=True)
-        return Response({'chat': serializer.data})
+# class IndexView(APIView):
+#     def get(self, request):
+#         chat = Chat.objects.all()
+#         serializer = ChatSerializer(chat, many=True)
+#         return Response({'chat': serializer.data})
+#
+#     def post(self, request):
+#         chat = request.data.get('chat')
+#         serializer = ChatSerializer(data=chat)
+#         if serializer.is_valid(raise_exception=True):
+#             chat_saved = serializer.save()
+#             return Response({"success": "Chat ' {} ' created successfully".format(chat.chat_type)})
 
-    def post(self, request):
-        chat = request.data.get('chat')
-        serializer = ChatSerializer(data=chat)
-        if serializer.is_valid(raise_exception=True):
-            chat_saved = serializer.save()
-            return Response({"success": "Chat ' {} ' created successfully".format(chat.chat_type)})
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = UserChatSerializer
+
+
+class GroupViewSet(viewsets.ModelViewSet):
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
 
 
 def register(request):
@@ -78,7 +88,9 @@ def login_redirect(request):
 
 @login_required()
 def view_profile(request):
-    args = {'user': request.user}
+    per = Person.objects.all()
+    person = {'person': per}
+    args = {'user': request.user, 'person': person}
     return render(request, 'accounts/profile.html', args)
 
 

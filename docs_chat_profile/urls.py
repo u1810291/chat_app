@@ -1,9 +1,9 @@
-from django.urls import path
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from . import views
-from .views import IndexView
+# from .views import IndexView
 from django.contrib.auth.views import (
     LoginView,
     LogoutView,
@@ -12,10 +12,16 @@ from django.contrib.auth.views import (
     PasswordResetConfirmView,
     PasswordResetCompleteView
 )
+from rest_framework import routers
+
+
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'groups', views.GroupViewSet)
 
 
 urlpatterns = [
-    path('', views.index),
+    # path('', views.index),
     # path('', IndexView.as_view()),
     path('home/', views.home, name='home'),
     path('login/', LoginView.as_view(template_name='accounts/login.html'), name='login'),
@@ -29,6 +35,9 @@ urlpatterns = [
     path('password_reset/confirm/<uidb64>/<token>/', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('password_reset/complete/', PasswordResetCompleteView.as_view(), name='password_reset_complete'),
     # path('success/<int:chat_id>/detail', views.detail, name='detail'),
+
+    path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
 
 if settings.DEBUG:

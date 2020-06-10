@@ -4,12 +4,19 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container">
-        <p>
-            {{ user.first_name }}
-            {{ user.last_name }}
-            {{ user.username }}
-            {{ user.last_login }}
-        </p>
+    <div class="container jumbotron">
+
+        <h2>{{ user.first_name }}</h2>
+        <p>{{ user.last_name }}</p>
+        <p>{{ per.role }}</p>
+        <p>{{ per.country }}</p>
+        <p>{{ per.state }}</p>
+        <p>{{ per.city }}</p>
+        <p>{{ per.age }}</p>
+        <p>{{ per.sex }}</p>
+        <p>{{ per.user_longitude }}</p>
+        <p>{{ per.user_latitude }}</p>
+        <p>{{ user.username }}</p>
+        <p>{{ user.last_login }}</p>
     </div>
 {% endblock %}

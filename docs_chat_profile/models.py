@@ -20,6 +20,9 @@ class Person(models.Model):
     user_longitude = models.DecimalField(decimal_places=9, max_digits=20)
     user_latitude = models.DecimalField(decimal_places=9, max_digits=20)
 
+    def __str__(self):
+        return Person
+
 
 class Shipment_type(models.Model):
     type_name = models.CharField(max_length=255)
