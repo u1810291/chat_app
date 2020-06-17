@@ -26,6 +26,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+
+
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -79,7 +83,7 @@ DATABASES = {
         'USER': 'otabek',
         'PASSWORD': '1',
         'HOST': 'localhost',
-        'PORT': '5433',
+        'PORT': '5432',
     }
 }
 

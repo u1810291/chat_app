@@ -20,9 +20,6 @@ class Person(models.Model):
     user_longitude = models.DecimalField(decimal_places=9, max_digits=20)
     user_latitude = models.DecimalField(decimal_places=9, max_digits=20)
 
-    def __str__(self):
-        return Person
-
 
 class Shipment_type(models.Model):
     type_name = models.CharField(max_length=255)
@@ -32,15 +29,19 @@ class Payment_type(models.Model):
     type_name = models.CharField(max_length=250)
 
 
+class Product_type(models.Model):
+    type_name = models.CharField(max_length=200)
+
+
 # Shipments
 class Shipment(models.Model):
     client_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    time_created = models.DateTimeField()
+    product_type = models.ForeignKey(Product_type, on_delete=models.CASCADE)
     shipment_type = models.ForeignKey(Shipment_type, on_delete=models.CASCADE)
     payment_type = models.ForeignKey(Payment_type, on_delete=models.CASCADE)
+    time_created = models.DateTimeField()
     shipping_address = models.CharField(max_length=250)
     billing_address = models.CharField(max_length=250)
-    product_type = models.DecimalField(decimal_places=9, max_digits=20)
     delivery_cost = models.DecimalField(decimal_places=9, max_digits=20)
     discount = models.DecimalField(decimal_places=9, max_digits=20)
     final_price = models.DecimalField(decimal_places=9, max_digits=20)
@@ -48,8 +49,6 @@ class Shipment(models.Model):
     shipment_latitude = models.DecimalField(decimal_places=9, max_digits=20)
 
 
-class Product_type(models.Model):
-    type_name = models.CharField(max_length=200)
 
 
 class Product(models.Model):
@@ -63,8 +62,8 @@ class Product(models.Model):
 class Locations(models.Model):
     shipment_id = models.ForeignKey(Shipment, on_delete=models.CASCADE)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    driver_id = models.IntegerField()
     product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
+    driver_id = models.IntegerField()
     user_long = models.DecimalField(decimal_places=9, max_digits=20)
     user_lat = models.DecimalField(decimal_places=9, max_digits=20)
     product_long = models.DecimalField(decimal_places=9, max_digits=20)

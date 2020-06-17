@@ -12,7 +12,8 @@ from django.contrib.auth.decorators import login_required
 from rest_framework import viewsets
 # from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import UserChatSerializer, GroupSerializer
+from .serializers import *
+from .models import *
 
 
 # def index(request):
@@ -52,14 +53,6 @@ def index(request):
 #             chat_saved = serializer.save()
 #             return Response({"success": "Chat ' {} ' created successfully".format(chat.chat_type)})
 
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all().order_by('-date_joined')
-    serializer_class = UserChatSerializer
-
-
-class GroupViewSet(viewsets.ModelViewSet):
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
 
 
 def register(request):
@@ -122,3 +115,85 @@ def change_password(request):
         form = PasswordChangeForm(user=request.user)
         args = {'form': form}
         return render(request, 'accounts/change-password.html', args)
+
+
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = User_serializer
+
+
+class GroupViewSet(viewsets.ModelViewSet):
+    queryset = Group.objects.all()
+    serializer_class = Group_serializer
+
+
+class RoleViewSet(viewsets.ModelViewSet):
+    queryset = Role.objects.all()
+    serializer_class = Role_serializer
+
+
+class PersonViewSet(viewsets.ModelViewSet):
+    queryset = Person.objects.all()
+    serializer_class = Person_serializer
+
+
+class ShipmentTypeViewSet(viewsets.ModelViewSet):
+    queryset = Shipment_type.objects.all()
+    serializer_class = Shipment_type_serializer
+
+
+class PaymentTypeViewSet(viewsets.ModelViewSet):
+    queryset = Payment_type.objects.all()
+    serializer_class = Payment_type_serializer
+
+
+class ShipmentViewSet(viewsets.ModelViewSet):
+    queryset = Shipment.objects.all()
+    serializer_class = Shipment_serializer
+
+
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = Product_serializer
+
+
+class LocationsViewSet(viewsets.ModelViewSet):
+    queryset = Locations.objects.all()
+    serializer_class = Locations_serializer
+
+
+class StatusCatalogViewSet(viewsets.ModelViewSet):
+    queryset = Status_catalog.objects.all()
+    serializer_class = Status_catalog_serializer
+
+
+class ShipmentStatusViewSet(viewsets.ModelViewSet):
+    queryset = Shipment_status.objects.all()
+    serializer_class = Shipment_status_serializer
+
+
+class ShipmentDetailsViewSet(viewsets.ModelViewSet):
+    queryset = Shipment_details.objects.all()
+    serializer_class = Shipment_details_serializer
+
+
+class StockViewSet(viewsets.ModelViewSet):
+    queryset = Stock.objects.all()
+    serializer_class = Stock_serializer
+
+
+class ProductDetailsViewSet(viewsets.ModelViewSet):
+    queryset = Product_details.objects.all()
+    serializer_class = Product_details_serializer
+
+
+class PaymentDataViewSet(viewsets.ModelViewSet):
+    queryset = Payment_data.objects.all()
+    serializer_class = Payment_data_serializer
+
+
+class PaymentDetailsViewSet(viewsets.ModelViewSet):
+    queryset = Payment_details.objects.all()
+    serializer_class = Payment_details_serializer
