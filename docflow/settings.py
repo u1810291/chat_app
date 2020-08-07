@@ -15,17 +15,22 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
+# See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'h7y!g3pfo2!y$ppkd#yf=#u2s629!usdpjd09vs^@x4(vq3@bi'
+SECRET_KEY = 'xtu9w2dir6r@m7t2)n7z6mv2zfeiwh0xx9zz)i#1m3d1cph%cv'
+# SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+
+DEBUG = bool(int(os.environ.get("DEBUG", default=0)))
 
 ALLOWED_HOSTS = []
 
+# ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
 
 
@@ -131,10 +136,12 @@ MEDIA_URL = '/media/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
+STATIC_ROOT = os.path.join(BASE_DIR, 'docs_chat_profile/static')
+
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'docs_chat_profile/static'),
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'docs_chat_profile/static'),
+# ]
 
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 1025

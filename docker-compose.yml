@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  web:
+    image: docflow/chat_app:latest
+    build:
+      context: ./
+    volumes:
+      - static_volume:/usr/src/app/staticfiles
+    expose:
+      - 8000
+    ports:
+      - 8000:8000
+
+  nginx:
+    image: docflow/my_first_web_deploy_nginx:latest
+    build:
+      context: ./nginx
+    volumes:
+        - static_volume:/usr/src/app/staticfiles
+    ports:
+      - 1337:80
+    depends_on:
+      - web
+      
+volumes:
+    static_volume:
