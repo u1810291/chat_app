@@ -28,7 +28,7 @@ SECRET_KEY = 'xtu9w2dir6r@m7t2)n7z6mv2zfeiwh0xx9zz)i#1m3d1cph%cv'
 
 DEBUG = bool(int(os.environ.get("DEBUG", default=0)))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
@@ -86,8 +86,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'delivery',
         'USER': 'otabek',
-        'PASSWORD': '1',
-        'HOST': 'localhost',
+        'PASSWORD': '12345',
+        'HOST': 'postgres',
         'PORT': '5432',
     }
 }
@@ -136,7 +136,7 @@ MEDIA_URL = '/media/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'docs_chat_profile/static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATIC_URL = '/static/'
 # STATICFILES_DIRS = [
